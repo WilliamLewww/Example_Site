@@ -22,15 +22,8 @@ Update();
 function Update() {
     requestAnimationFrame(Update);
     if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
-    if (runTransition == true) {
-      RunTransition();
-    }
+    if (runTransition == true) { fade.SetSpeed(.005); fade.RunOnce(true); }
     Draw();
-}
-
-function RunTransition() {
-  fade.SetSpeed(.005);
-  fade.RunOnce(true);
 }
 
 function Draw() {
