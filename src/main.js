@@ -1,6 +1,9 @@
-var renderer = PIXI.autoDetectRenderer(SCREENWIDTH, SCREENHEIGHT,{backgroundColor : 0x220000});
+var renderer = PIXI.autoDetectRenderer(SCREENWIDTH, SCREENHEIGHT,{backgroundColor : 0x000000});
 document.body.appendChild(renderer.view);
 var stage = new PIXI.Container();
+
+document.addEventListener('keydown', onKeyDown);
+document.addEventListener('keyup', onKeyUp);
 
 var text = new PIXI.Text("William's Showcase", {font:"75px Times New Roman", fill:"darkred"});
 text.x = (SCREENWIDTH / 2) - (text.width / 2); text.y = (SCREENHEIGHT / 2) - (text.height / 2);
@@ -18,11 +21,21 @@ var exitIntro = false, createText = false;
 
 var runTransition = false;
 
+function ScriptedEvents() {
+  if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
+  if (runTransition == true) { setTimeout(function() { renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
+  if (runTransition == true && fade.visible == false) { runTransition = false; }
+}
+
+function GenIntEnv() {
+
+}
+
 Update();
 function Update() {
     requestAnimationFrame(Update);
-    if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
-    if (runTransition == true) { fade.SetSpeed(.005); fade.RunOnce(true); }
+    ScriptedEvents();
+
     Draw();
 }
 
