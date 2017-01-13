@@ -1,3 +1,14 @@
+class Player {
+  constructor(positionParam) {
+    this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('content/pigeon.png'));
+    this.sprite.position.x = positionParam.x;
+    this.sprite.position.y = positionParam.y;
+    this.sprite.width /= 3;
+    this.sprite.height /= 3;
+    stage.addChild(this.sprite);
+  }
+}
+
 class FadeObject {
   constructor(initialState, speedParam, color) {
     this.visible = initialState;

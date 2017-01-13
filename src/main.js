@@ -21,9 +21,13 @@ var exitIntro = false, createText = false;
 
 var runTransition = false;
 
+var player;
+
 function ScriptedEvents() {
   if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
-  if (runTransition == true) { setTimeout(function() { renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
+  if (runTransition == true) { setTimeout(function() {
+    player = new Player(new Vector2(0, 0));
+    renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
   if (runTransition == true && fade.visible == false) { runTransition = false; }
 }
 
