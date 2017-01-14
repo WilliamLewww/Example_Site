@@ -1,26 +1,49 @@
 class Player {
   constructor(positionParam) {
-    this.texture = PIXI.Texture.fromImage("content/pigeon.png");
-    this.object = new PIXI.Sprite(this.texture);
+    this.texture1 = PIXI.Texture.fromImage("content/pigeon1.png");
+    this.texture2 = PIXI.Texture.fromImage("content/pigeon2.png");
+    this.texture3 = PIXI.Texture.fromImage("content/pigeon3.png");
+    this.texture4 = PIXI.Texture.fromImage("content/pigeon4.png");
+    this.texture5 = PIXI.Texture.fromImage("content/pigeon5.png");
+
+    this.object = new PIXI.Sprite(this.texture1);
+    stage.addChildAt(this.object, 0);
+    
     this.object.x = positionParam.x;
     this.object.y = positionParam.y;
-    this.object.scale.x = 0.33;
-    this.object.scale.y = 0.33;
-    stage.addChildAt(this.object, 0);
+    this.object.scale.x = 0.25;
+    this.object.scale.y = 0.25;
+
+    this.facingRight = true;
 
     this.velocityX = 0;
     this.velocityY = 0;
   }
 
   Update(deltaTime) {
+    var deltaTimeS = deltaTime / 1000;
     if (keyList.indexOf(39) != -1 && keyList.indexOf(37) == -1) {
-      this.velocityX = 1;
+      if (this.facingRight == false) {
+        this.object.scale.x = 0.25;
+        this.object.x -= this.texture1.width * 0.25;
+        this.facingRight = true;
+      }
+      this.velocityX = 2.5;
     }
     if (keyList.indexOf(37) != -1 && keyList.indexOf(39) == -1) {
-      this.velocityX = -1;
+      if (this.facingRight == true) {
+        this.object.scale.x = -0.25;
+        this.object.x += this.texture1.width * 0.25;
+        this.facingRight = false;
+      }
+      this.velocityX = -2.5;
     }
     if (keyList.indexOf(37) == -1 && keyList.indexOf(39) == -1 || keyList.indexOf(37) != -1 && keyList.indexOf(39) != -1) {
       this.velocityX = 0;
+    }
+
+    if (keyList.indexOf(32) != -1 ) {
+      this.velocityY += 9.8 * deltaTimeS;
     }
 
     this.object.x += this.velocityX;
