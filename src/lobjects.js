@@ -7,15 +7,24 @@ class Player {
     this.object.scale.x = 0.33;
     this.object.scale.y = 0.33;
     stage.addChildAt(this.object, 0);
+
+    this.velocityX = 0;
+    this.velocityY = 0;
   }
 
-  Update() {
-    if (keyList.indexOf(39) != -1) {
-      this.object.x += 1;
+  Update(deltaTime) {
+    if (keyList.indexOf(39) != -1 && keyList.indexOf(37) == -1) {
+      this.velocityX = 1;
     }
-    if (keyList.indexOf(37) != -1) {
-      this.object.x -= 1;
+    if (keyList.indexOf(37) != -1 && keyList.indexOf(39) == -1) {
+      this.velocityX = -1;
     }
+    if (keyList.indexOf(37) == -1 && keyList.indexOf(39) == -1 || keyList.indexOf(37) != -1 && keyList.indexOf(39) != -1) {
+      this.velocityX = 0;
+    }
+
+    this.object.x += this.velocityX;
+    this.object.y += this.velocityY;
   }
 }
 

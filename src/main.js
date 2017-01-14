@@ -35,13 +35,19 @@ function GenIntEnv() {
     environmentGenerated = true;
 }
 
+var frameStart = Date.now(), frameEnd = 0;
+var deltaTime  = 0;
 Update();
 function Update() {
+    frameEnd = Date.now();
+    deltaTime = frameEnd - frameStart;
+    frameStart = frameEnd;
+
     requestAnimationFrame(Update);
     ScriptedEvents();
-    
+
     if (environmentGenerated == true) {
-      player.Update();
+      player.Update(deltaTime);
     }
 
     Draw();
