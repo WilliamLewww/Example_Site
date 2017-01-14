@@ -21,24 +21,28 @@ var exitIntro = false, createText = false;
 
 var runTransition = false;
 
+var environmentGenerated = false;
 var player;
 
 function ScriptedEvents() {
   if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
-  if (runTransition == true) { setTimeout(function() {
-    player = new Player(new Vector2(0, 0));
-    renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
+  if (runTransition == true) { setTimeout(function() { if (player == null) { GenIntEnv(); } renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
   if (runTransition == true && fade.visible == false) { runTransition = false; }
 }
 
 function GenIntEnv() {
-
+    player = new Player(new Vector2(100, 100));
+    environmentGenerated = true;
 }
 
 Update();
 function Update() {
     requestAnimationFrame(Update);
     ScriptedEvents();
+    
+    if (environmentGenerated == true) {
+      player.Update();
+    }
 
     Draw();
 }

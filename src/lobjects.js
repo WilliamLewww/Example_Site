@@ -1,11 +1,21 @@
 class Player {
   constructor(positionParam) {
-    this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('content/pigeon.png'));
-    this.sprite.position.x = positionParam.x;
-    this.sprite.position.y = positionParam.y;
-    this.sprite.width /= 3;
-    this.sprite.height /= 3;
-    stage.addChild(this.sprite);
+    this.texture = PIXI.Texture.fromImage("content/pigeon.png");
+    this.object = new PIXI.Sprite(this.texture);
+    this.object.x = positionParam.x;
+    this.object.y = positionParam.y;
+    this.object.scale.x = 0.33;
+    this.object.scale.y = 0.33;
+    stage.addChildAt(this.object, 0);
+  }
+
+  Update() {
+    if (keyList.indexOf(39) != -1) {
+      this.object.x += 1;
+    }
+    if (keyList.indexOf(37) != -1) {
+      this.object.x -= 1;
+    }
   }
 }
 
