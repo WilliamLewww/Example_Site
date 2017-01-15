@@ -5,7 +5,7 @@ function onKeyDown(key) {
     keyList.push(key.keyCode);
   }
 
-  keyList.forEach(function (item, index, array) { console.log(item, index); });
+  //keyList.forEach(function (item, index, array) { console.log(item, index); });
 }
 
 function onKeyUp(key) {
