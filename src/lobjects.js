@@ -104,10 +104,23 @@ class Cloud {
     this.object.y = positionParam.y;
     this.object.scale.x = scale;
     this.object.scale.y = scale;
+
+    this.speed = (Math.random() * .3) + .2
+    this.cycle = Math.random() * 200;
+
+    this.moveRight = Math.floor(Math.random() * 2);
   }
 
   Update() {
-    
+    if (this.cycle >= 200) {
+      this.moveRight = !this.moveRight;
+      this.cycle = 0;
+    }
+
+    if (this.moveRight == true) { this.object.x += this.speed; }
+    else { this.object.x -= this.speed; }
+
+    this.cycle += 1;
   }
 }
 
@@ -115,8 +128,12 @@ class CloudArray {
   constructor(count) {
     this.array = [];
     for (var x = 0; x < count; x++) {
-      this.array.push(new Cloud(new Vector2(x * (SCREENWIDTH / count) + 150, (Math.random() * 75) + 10), 1));
+      this.array.push(new Cloud(new Vector2(x * (SCREENWIDTH / count) + 100, (Math.random() * 75) + 10), 1));
     }
+  }
+
+  Update() {
+    this.array.forEach(function(element) { element.Update(); });
   }
 }
 

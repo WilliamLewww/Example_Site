@@ -50,9 +50,7 @@ function Update() {
 
     if (environmentGenerated == true) {
       player.Update(deltaTime);
-      cloudArray.array.forEach(function(element) {
-        element.Update();
-      });
+      cloudArray.Update();
     }
 
     Draw();
