@@ -27,6 +27,14 @@ class Player {
     this.onGround = false;
   }
 
+  Width() { return (this.texture1.width * .25) / 2; }
+  Height() { return (this.texture1.height * .25) / 2; }
+
+  Top() { return this.object.y - this.Height() }
+  Bottom() { return this.object.y + this.Height() }
+  Left() { return this.object.x - this.Width() }
+  Right() { return this.object.x + this.Width() }
+
   SetTexture(index) {
     switch (index) {
       case 1:
@@ -84,8 +92,9 @@ class Player {
       this.animationPhase = 0;
     }
 
-    if (this.object.y + ((this.texture1.height * .25) / 2) >= SCREENHEIGHT - 50) {
-      this.object.y = SCREENHEIGHT - 50 - ((this.texture1.height * .25) / 2);
+    if (this.Bottom() >= SCREENHEIGHT - 50) {
+      this.velocityY = 0;
+      this.object.y = SCREENHEIGHT - 50 - this.Height();
       this.onGround = true;
     }
 
@@ -93,7 +102,6 @@ class Player {
       this.velocityY += 9.8 * deltaTimeS;
     }
     else {
-      this.velocityY = 0;
       if (keyList.indexOf(32) != -1 ) {
         this.velocityY = -5;
         this.onGround = false;

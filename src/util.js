@@ -16,6 +16,11 @@ class Rectangle {
     this.alpha = alphaParam;
   }
 
+  get Top() { return this.position.y; }
+  get Bottom() { return this.position.y + this.size.y; }
+  get Left() { return this.position.x; }
+  get Right() { return this.position.x + this.size.x; }
+
   Draw() {
     graphics.beginFill(this.color, this.alpha);
     graphics.drawRect(this.position.x, this.position.y, this.size.x, this.size.y);
