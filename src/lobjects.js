@@ -196,6 +196,8 @@ class Cow {
 
 class Environment {
   constructor(cloudCount, cowCount) {
+    this.GenerateGround(39);
+
     this.cloudArray = [];
     for (var x = 0; x < cloudCount; x++) {
       this.cloudArray.push(new Cloud(new Vector2(x * (SCREENWIDTH / cloudCount) + 100, (Math.random() * 75) + 10), 1));
@@ -209,6 +211,17 @@ class Environment {
     this.bearArray = [];
     for (var x = 0; x < cowCount; x++) {
       this.bearArray.push(new SpaceBear(new Vector2(x * (SCREENWIDTH / cowCount), (Math.random() * SCREENHEIGHT) + 50), .15));
+    }
+  }
+
+  GenerateGround(count) {
+    this.texture = PIXI.Texture.fromImage("content/dirt.png");
+    this.groundArray = [];
+    for (var x = 0; x < count; x++) {
+      this.groundArray.push(new PIXI.Sprite(this.texture));
+      this.groundArray[x].y = SCREENHEIGHT - 50;
+      this.groundArray[x].x = x * 50;
+      stage.addChildAt(this.groundArray[x], 0);
     }
   }
 
