@@ -26,14 +26,16 @@ var player; var environment;
 
 function ScriptedEvents() {
   if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
-  if (runTransition == true) { setTimeout(function() { if (player == null) { GenIntEnv(); } renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
+  if (runTransition == true) { setTimeout(function() { GenIntEnv(); renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
   if (runTransition == true && fade.visible == false) { runTransition = false; }
 }
 
 function GenIntEnv() {
+  if (player == null) {
     player = new Player(new Vector2(100, 100));
     environment = new Environment(25, 30, 30);
     environmentGenerated = true;
+  }
 }
 
 var frameStart = Date.now(), frameEnd = 0;
