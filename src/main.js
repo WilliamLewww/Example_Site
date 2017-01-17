@@ -58,7 +58,7 @@ function Update() {
 
 function Draw() {
   fade.Draw();
-
+  
   renderer.render(stage);
   graphics.clear();
 }
