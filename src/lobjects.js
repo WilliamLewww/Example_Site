@@ -91,6 +91,35 @@ class Player {
   }
 }
 
+class Cloud {
+  constructor(positionParam, scale) {
+    this.texture = PIXI.Texture.fromImage("content/cloud.png");
+    this.object = new PIXI.Sprite(this.texture);
+    stage.addChildAt(this.object, 0);
+
+    this.object.anchor.x = 0.5;
+    this.object.anchor.y = 0.5;
+
+    this.object.x = positionParam.x;
+    this.object.y = positionParam.y;
+    this.object.scale.x = scale;
+    this.object.scale.y = scale;
+  }
+
+  Update() {
+    
+  }
+}
+
+class CloudArray {
+  constructor(count) {
+    this.array = [];
+    for (var x = 0; x < count; x++) {
+      this.array.push(new Cloud(new Vector2(x * (SCREENWIDTH / count) + 150, (Math.random() * 75) + 10), 1));
+    }
+  }
+}
+
 class FadeObject {
   constructor(initialState, speedParam, color) {
     this.visible = initialState;
