@@ -22,8 +22,7 @@ var exitIntro = false, createText = false;
 var runTransition = false;
 
 var environmentGenerated = false;
-var player;
-var cloudArray;
+var player; var environment;
 
 function ScriptedEvents() {
   if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
@@ -33,7 +32,7 @@ function ScriptedEvents() {
 
 function GenIntEnv() {
     player = new Player(new Vector2(100, 100));
-    cloudArray = new CloudArray(25);
+    environment = new Environment(25, 30, 30);
     environmentGenerated = true;
 }
 
@@ -50,7 +49,7 @@ function Update() {
 
     if (environmentGenerated == true) {
       player.Update(deltaTime);
-      cloudArray.Update();
+      environment.Update();
     }
 
     Draw();
@@ -58,7 +57,7 @@ function Update() {
 
 function Draw() {
   fade.Draw();
-  
+
   renderer.render(stage);
   graphics.clear();
 }

@@ -95,7 +95,7 @@ class Cloud {
   constructor(positionParam, scale) {
     this.texture = PIXI.Texture.fromImage("content/cloud.png");
     this.object = new PIXI.Sprite(this.texture);
-    stage.addChildAt(this.object, 0);
+    stage.addChildAt(this.object, 1);
 
     this.object.anchor.x = 0.5;
     this.object.anchor.y = 0.5;
@@ -124,16 +124,98 @@ class Cloud {
   }
 }
 
-class CloudArray {
-  constructor(count) {
-    this.array = [];
-    for (var x = 0; x < count; x++) {
-      this.array.push(new Cloud(new Vector2(x * (SCREENWIDTH / count) + 100, (Math.random() * 75) + 10), 1));
+class SpaceBear {
+  constructor(initialPosition, scale) {
+    this.texture = PIXI.Texture.fromImage("content/bear.png");
+    this.object = new PIXI.Sprite(this.texture);
+    this.object.alpha = (Math.random() * .3) + .2;
+    stage.addChildAt(this.object, 0);
+
+    this.object.anchor.x = 0.5;
+    this.object.anchor.y = 0.5;
+
+    this.object.x = initialPosition.x;
+    this.object.y = initialPosition.y;
+    this.object.scale.x = scale;
+    this.object.scale.y = scale;
+
+    this.speedX = (Math.random() * 2) + 1;;
+    this.speedY = (Math.random() * 3) + 4;
+    this.speedRotation = (Math.random() * .05) + .005;
+  }
+
+  Update() {
+    this.object.rotation += this.speedRotation;
+    this.object.x += this.speedX;
+    this.object.y += this.speedY;
+
+    if (this.object.x > SCREENWIDTH) {
+      this.object.x = -this.texture.width;
+    }
+
+    if (this.object.y > SCREENHEIGHT) {
+      this.object.y = 50;
+    }
+  }
+}
+
+class Cow {
+  constructor(initialPosition, scale) {
+    this.texture = PIXI.Texture.fromImage("content/cow.png");
+    this.object = new PIXI.Sprite(this.texture);
+    this.object.alpha = (Math.random() * .3) + .2;
+    stage.addChildAt(this.object, 0);
+
+    this.object.anchor.x = 0.5;
+    this.object.anchor.y = 0.5;
+
+    this.object.x = initialPosition.x;
+    this.object.y = initialPosition.y;
+    this.object.scale.x = scale;
+    this.object.scale.y = scale;
+
+    this.speedX = (Math.random() * 2) + 1;;
+    this.speedY = (Math.random() * 3) + 4;
+    this.speedRotation = (Math.random() * .05) + .005;
+  }
+
+  Update() {
+    this.object.rotation += this.speedRotation;
+    this.object.x += this.speedX;
+    this.object.y += this.speedY;
+
+    if (this.object.x > SCREENWIDTH) {
+      this.object.x = -this.texture.width;
+    }
+
+    if (this.object.y > SCREENHEIGHT) {
+      this.object.y = 50;
+    }
+  }
+}
+
+class Environment {
+  constructor(cloudCount, cowCount) {
+    this.cloudArray = [];
+    for (var x = 0; x < cloudCount; x++) {
+      this.cloudArray.push(new Cloud(new Vector2(x * (SCREENWIDTH / cloudCount) + 100, (Math.random() * 75) + 10), 1));
+    }
+
+    this.cowArray = [];
+    for (var x = 0; x < cowCount; x++) {
+      this.cowArray.push(new Cow(new Vector2(x * (SCREENWIDTH / cowCount), (Math.random() * SCREENHEIGHT) + 50), .20));
+    }
+
+    this.bearArray = [];
+    for (var x = 0; x < cowCount; x++) {
+      this.bearArray.push(new SpaceBear(new Vector2(x * (SCREENWIDTH / cowCount), (Math.random() * SCREENHEIGHT) + 50), .15));
     }
   }
 
   Update() {
-    this.array.forEach(function(element) { element.Update(); });
+    this.cloudArray.forEach(function(element) { element.Update(); });
+    this.cowArray.forEach(function(element) { element.Update(); });
+    this.bearArray.forEach(function(element) { element.Update(); });
   }
 }
 
