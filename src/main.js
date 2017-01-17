@@ -32,7 +32,7 @@ function ScriptedEvents() {
 
 function GenIntEnv() {
   if (player == null) {
-    player = new Player(new Vector2(100, 100));
+    player = new Player(new Vector2(100, SCREENHEIGHT - 100));
     environment = new Environment(25, 30, 30);
     environmentGenerated = true;
   }

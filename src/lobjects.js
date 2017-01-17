@@ -23,6 +23,8 @@ class Player {
     this.object.anchor.y = 0.5;
 
     this.animationPhase = 0;
+
+    this.onGround = false;
   }
 
   SetTexture(index) {
@@ -82,8 +84,20 @@ class Player {
       this.animationPhase = 0;
     }
 
-    if (keyList.indexOf(32) != -1 ) {
+    if (this.object.y + ((this.texture1.height * .25) / 2) >= SCREENHEIGHT - 50) {
+      this.object.y = SCREENHEIGHT - 50 - ((this.texture1.height * .25) / 2);
+      this.onGround = true;
+    }
+
+    if (this.onGround == false) {
       this.velocityY += 9.8 * deltaTimeS;
+    }
+    else {
+      this.velocityY = 0;
+      if (keyList.indexOf(32) != -1 ) {
+        this.velocityY = -5;
+        this.onGround = false;
+      }
     }
 
     this.object.x += this.velocityX;
