@@ -26,7 +26,7 @@ var player; var environment;
 
 function ScriptedEvents() {
   if (exitIntro == false) { setTimeout(function() { RunIntro(); }, 1000); }
-  if (runTransition == true) { setTimeout(function() { GenIntEnv(); renderer.backgroundColor = 0xFFFFFF; fade.SetSpeed(.005); fade.RunOnce(true); }, 2000);}
+  if (runTransition == true) { setTimeout(function() { GenIntEnv(); renderer.backgroundColor = 0xAED6F1; fade.SetSpeed(.002); fade.RunOnce(true); }, 2000);}
   if (runTransition == true && fade.visible == false) { runTransition = false; }
 }
 

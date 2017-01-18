@@ -218,7 +218,7 @@ class Cow {
 
 class Environment {
   constructor(cloudCount, cowCount) {
-    this.GenerateGround(39);
+    this.GenerateGround(39, 15);
 
     this.cloudArray = [];
     for (var x = 0; x < cloudCount; x++) {
@@ -236,21 +236,35 @@ class Environment {
     }
   }
 
-  GenerateGround(count) {
-    this.texture = PIXI.Texture.fromImage("content/dirt.png");
-    this.groundArray = [];
-    for (var x = 0; x < count; x++) {
-      this.groundArray.push(new PIXI.Sprite(this.texture));
-      this.groundArray[x].y = SCREENHEIGHT - 50;
-      this.groundArray[x].x = x * 50;
-      stage.addChildAt(this.groundArray[x], 0);
+  GenerateGround(dirtCount, grassCount) {
+    this.textureDirt = PIXI.Texture.fromImage("content/dirt.png");
+    this.dirtArray = [];
+    for (var x = 0; x < dirtCount; x++) {
+      this.dirtArray.push(new PIXI.Sprite(this.textureDirt));
+      this.dirtArray[x].y = SCREENHEIGHT - 50;
+      this.dirtArray[x].x = x * 50;
+      stage.addChildAt(this.dirtArray[x], 1);
     }
+
+    this.textureGrass = PIXI.Texture.fromImage("content/grass.png");
+    this.grassArray = [];
+    for (var x = 0; x < grassCount / 2; x++) {
+      this.grassArray.push(new PIXI.Sprite(this.textureGrass));
+      this.grassArray[x].y = SCREENHEIGHT - 100;
+      this.grassArray[x].x = x * 256;
+      stage.addChildAt(this.grassArray[x], 1);
+    }
+
+    this.filter = new FadeObject(false, .0005, 0x17202A);
   }
 
   Update() {
     this.cloudArray.forEach(function(element) { element.Update(); });
     this.cowArray.forEach(function(element) { element.Update(); });
     this.bearArray.forEach(function(element) { element.Update(); });
+
+    this.filter.RunThreshold(.5, .7);
+    this.filter.Draw();
   }
 }
 
@@ -279,6 +293,27 @@ class FadeObject {
     else {
       if (this.rectangle.alpha + this.speed >= 1) {
         this.rectangle.alpha = 1;
+        this.visible = true;
+      }
+      else {
+        this.rectangle.alpha += this.speed;
+      }
+    }
+  }
+
+  RunThreshold(min, max) {
+    if (this.visible == true) {
+      if (this.rectangle.alpha - this.speed <= min) {
+        this.rectangle.alpha = min;
+        this.visible = false;
+      }
+      else {
+        this.rectangle.alpha -= this.speed;
+      }
+    }
+    else {
+      if (this.rectangle.alpha + this.speed >= max) {
+        this.rectangle.alpha = max;
         this.visible = true;
       }
       else {
