@@ -5,9 +5,9 @@ var stage = new PIXI.Container();
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
-var text = new PIXI.Text("William's Showcase", {font:"75px Times New Roman", fill:"darkred"});
+var text = new PIXI.Text("William's Showcase", {font:"50px Courier New", fill:"darkred"});
 text.x = (SCREENWIDTH / 2) - (text.width / 2); text.y = (SCREENHEIGHT / 2) - (text.height / 2);
-var text2 = new PIXI.Text("of useless shit", {font:"25 Times New Roman", fill:"#090909"});
+var text2 = new PIXI.Text("I don't know how to make websites", {font:"20 Impact", fill:"#090909"});
 text2.x = (SCREENWIDTH / 2) - (text2.width / 2); text2.y = (SCREENHEIGHT / 2) + text2.height;
 text2.visible = false;
 stage.addChild(text);
