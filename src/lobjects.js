@@ -210,7 +210,7 @@ class Cow {
       this.object.x = -this.texture.width;
     }
 
-    if (this.object.y > SCREENHEIGHT) {
+    if (this.object.y > SCREENHEIGHT - 50) {
       this.object.y = 50;
     }
   }

@@ -2,6 +2,14 @@ var renderer = PIXI.autoDetectRenderer(SCREENWIDTH, SCREENHEIGHT,{backgroundColo
 document.body.appendChild(renderer.view);
 var stage = new PIXI.Container();
 
+var rainSound = new Howl({
+  src: ['content/rain.wav'],
+  loop: true,
+});
+
+rainSound.play();
+rainSound.fade(0, 0.25, 5000);
+
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
@@ -33,7 +41,7 @@ function ScriptedEvents() {
 function GenIntEnv() {
   if (player == null) {
     player = new Player(new Vector2(100, SCREENHEIGHT - 100));
-    environment = new Environment(25, 30, 30);
+    environment = new Environment(25, 50, 50);
     environmentGenerated = true;
   }
 }
