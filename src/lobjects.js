@@ -25,6 +25,23 @@ class Player {
     this.animationPhase = 0;
 
     this.onGround = false;
+
+    this.playStop = false;
+
+    this.waddleSound = new Howl({
+      src: ['content/waddle.wav'],
+      volume: 0.25
+    });
+
+    this.stopWaddleSound = new Howl({
+      src: ['content/stopwaddle.wav'],
+      volume: 0.25
+    });
+
+    this.jumpSound = new Howl({
+      src: ['content/jump.wav'],
+      volume: 0.25
+    });
   }
 
   Width() { return (this.texture1.width * .25) / 2; }
@@ -58,32 +75,40 @@ class Player {
   Update(deltaTime) {
     var deltaTimeS = deltaTime / 1000;
     if (keyList.indexOf(39) != -1 && keyList.indexOf(37) == -1) {
-      if (this.object.rotation == 0) { this.object.rotation = -0.3; }
+      if (this.object.rotation == 0) { this.waddleSound.play(); this.object.rotation = -0.3; }
       if (this.facingRight == false) {
         this.object.scale.x = 0.25;
         //this.object.x -= this.texture1.width * 0.25;
         this.facingRight = true;
       }
+      this.playStop = true;
       this.velocityX = 2.5;
       this.animationPhase += 2.5;
     }
     if (keyList.indexOf(37) != -1 && keyList.indexOf(39) == -1) {
-      if (this.object.rotation == 0) { this.object.rotation = 0.3; }
+      if (this.object.rotation == 0) { this.waddleSound.play(); this.object.rotation = 0.3; }
       if (this.facingRight == true) {
         this.object.scale.x = -0.25;
         //this.object.x += this.texture1.width * 0.25;
         this.facingRight = false;
       }
+      this.playStop = true;
       this.velocityX = -2.5;
       this.animationPhase += 2.5;
     }
     if (keyList.indexOf(37) == -1 && keyList.indexOf(39) == -1 || keyList.indexOf(37) != -1 && keyList.indexOf(39) != -1) {
+      if (this.playStop == true) {
+        this.stopWaddleSound.play();
+        this.playStop = false;
+      }
+
       this.velocityX = 0;
       this.object.rotation = 0;
       this.animationPhase = 0;
     }
 
     if (this.animationPhase >= 50) {
+      this.waddleSound.play();
       this.SetTexture(Math.floor((Math.random() * 5) + 1));
 
       if (this.object.rotation < 0) { this.object.rotation = 0.3; }
@@ -99,10 +124,12 @@ class Player {
     }
 
     if (this.onGround == false) {
+      this.animationPhase += 1.5;
       this.velocityY += 9.8 * deltaTimeS;
     }
     else {
       if (keyList.indexOf(32) != -1 ) {
+        this.jumpSound.play();
         this.velocityY = -5;
         this.onGround = false;
       }
