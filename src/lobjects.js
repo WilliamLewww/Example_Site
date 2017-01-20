@@ -74,8 +74,9 @@ class Player {
 
   Update(deltaTime) {
     var deltaTimeS = deltaTime / 1000;
+    var stereoPosition = ((this.object.x / SCREENWIDTH) * 2) - 1;
     if (keyList.indexOf(39) != -1 && keyList.indexOf(37) == -1) {
-      if (this.object.rotation == 0) { this.waddleSound.play(); this.object.rotation = -0.3; }
+      if (this.object.rotation == 0) { this.waddleSound.play(); this.waddleSound.stereo(stereoPosition); this.object.rotation = -0.3; }
       if (this.facingRight == false) {
         this.object.scale.x = 0.25;
         //this.object.x -= this.texture1.width * 0.25;
@@ -86,7 +87,7 @@ class Player {
       this.animationPhase += 2.5;
     }
     if (keyList.indexOf(37) != -1 && keyList.indexOf(39) == -1) {
-      if (this.object.rotation == 0) { this.waddleSound.play(); this.object.rotation = 0.3; }
+      if (this.object.rotation == 0) { this.waddleSound.play(); this.waddleSound.stereo(stereoPosition); this.object.rotation = 0.3; }
       if (this.facingRight == true) {
         this.object.scale.x = -0.25;
         //this.object.x += this.texture1.width * 0.25;
@@ -99,6 +100,7 @@ class Player {
     if (keyList.indexOf(37) == -1 && keyList.indexOf(39) == -1 || keyList.indexOf(37) != -1 && keyList.indexOf(39) != -1) {
       if (this.playStop == true) {
         this.stopWaddleSound.play();
+        this.stopWaddleSound.stereo(stereoPosition);
         this.playStop = false;
       }
 
@@ -109,6 +111,7 @@ class Player {
 
     if (this.animationPhase >= 50) {
       this.waddleSound.play();
+      this.waddleSound.stereo(stereoPosition);
       this.SetTexture(Math.floor((Math.random() * 5) + 1));
 
       if (this.object.rotation < 0) { this.object.rotation = 0.3; }
@@ -130,6 +133,7 @@ class Player {
     else {
       if (keyList.indexOf(32) != -1 ) {
         this.jumpSound.play();
+        this.jumpSound.stereo(stereoPosition);
         this.velocityY = -5;
         this.onGround = false;
       }
