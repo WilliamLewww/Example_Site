@@ -8,8 +8,16 @@ var rainSound = new Howl({
   volume: 0
 });
 
+var calmSound = new Howl({
+  src: ['content/calmbackground.wav'],
+  loop: true,
+  volume: 0
+});
+
 rainSound.play();
 rainSound.fade(0, 0.25, 5000);
+calmSound.play();
+calmSound.fade(0, 0.15, 20000);
 
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
