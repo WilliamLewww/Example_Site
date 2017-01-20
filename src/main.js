@@ -5,6 +5,7 @@ var stage = new PIXI.Container();
 var rainSound = new Howl({
   src: ['content/rain.wav'],
   loop: true,
+  volume: 0
 });
 
 rainSound.play();
