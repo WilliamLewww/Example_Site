@@ -21,6 +21,8 @@ calmSound.fade(0, 0.15, 20000);
 
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
+document.addEventListener('mousedown', onMouseDown);
+document.addEventListener('mouseup', onMouseUp);
 
 var text = new PIXI.Text("William's Showcase", {font:"50px Courier New", fill:"darkred"});
 text.x = (SCREENWIDTH / 2) - (text.width / 2); text.y = (SCREENHEIGHT / 2) - (text.height / 2);

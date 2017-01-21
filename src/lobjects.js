@@ -30,17 +30,17 @@ class Player {
 
     this.waddleSound = new Howl({
       src: ['content/waddle.wav'],
-      volume: 0.25
+      volume: 0.15
     });
 
     this.stopWaddleSound = new Howl({
       src: ['content/stopwaddle.wav'],
-      volume: 0.25
+      volume: 0.15
     });
 
     this.jumpSound = new Howl({
       src: ['content/jump.wav'],
-      volume: 0.25
+      volume: 0.15
     });
   }
 
