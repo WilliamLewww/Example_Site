@@ -1,12 +1,6 @@
 class Player {
   constructor(positionParam) {
-    this.texture1 = PIXI.Texture.fromImage("content/pigeon1.png");
-    this.texture2 = PIXI.Texture.fromImage("content/pigeon2.png");
-    this.texture3 = PIXI.Texture.fromImage("content/pigeon3.png");
-    this.texture4 = PIXI.Texture.fromImage("content/pigeon4.png");
-    this.texture5 = PIXI.Texture.fromImage("content/pigeon5.png");
-
-    this.object = new PIXI.Sprite(this.texture1);
+    this.object = new PIXI.Sprite(PIXI.loader.resources.pigeon1.texture);
     stage.addChildAt(this.object, 0);
 
     this.object.x = positionParam.x;
@@ -44,8 +38,8 @@ class Player {
     });
   }
 
-  Width() { return (this.texture1.width * .25) / 2; }
-  Height() { return (this.texture1.height * .25) / 2; }
+  Width() { return (PIXI.loader.resources.pigeon1.texture.width * .25) / 2; }
+  Height() { return (PIXI.loader.resources.pigeon1.texture.height * .25) / 2; }
 
   Top() { return this.object.y - this.Height() }
   Bottom() { return this.object.y + this.Height() }
@@ -55,19 +49,19 @@ class Player {
   SetTexture(index) {
     switch (index) {
       case 1:
-        this.object.texture = this.texture1;
+        this.object.texture = PIXI.loader.resources.pigeon1.texture;
         break;
       case 2:
-        this.object.texture = this.texture2;
+        this.object.texture = PIXI.loader.resources.pigeon2.texture;
         break;
       case 3:
-        this.object.texture = this.texture3;
+        this.object.texture = PIXI.loader.resources.pigeon3.texture;
         break;
       case 4:
-        this.object.texture = this.texture4;
+        this.object.texture = PIXI.loader.resources.pigeon4.texture;
         break;
       case 5:
-        this.object.texture = this.texture5;
+        this.object.texture = PIXI.loader.resources.pigeon5.texture;
         break;
     }
   }
@@ -146,8 +140,7 @@ class Player {
 
 class Cloud {
   constructor(positionParam, scale) {
-    this.texture = PIXI.Texture.fromImage("content/cloud.png");
-    this.object = new PIXI.Sprite(this.texture);
+    this.object = new PIXI.Sprite(PIXI.loader.resources.cloud.texture);
     stage.addChildAt(this.object, 1);
 
     this.object.anchor.x = 0.5;
@@ -179,8 +172,7 @@ class Cloud {
 
 class SpaceBear {
   constructor(initialPosition, scale) {
-    this.texture = PIXI.Texture.fromImage("content/bear.png");
-    this.object = new PIXI.Sprite(this.texture);
+    this.object = new PIXI.Sprite(PIXI.loader.resources.bear.texture);
     this.object.alpha = (Math.random() * .3) + .2;
     stage.addChildAt(this.object, 0);
 
@@ -203,7 +195,7 @@ class SpaceBear {
     this.object.y += this.speedY;
 
     if (this.object.x > SCREENWIDTH) {
-      this.object.x = -this.texture.width;
+      this.object.x = -PIXI.loader.resources.bear.texture.width;
     }
 
     if (this.object.y > SCREENHEIGHT) {
@@ -214,8 +206,7 @@ class SpaceBear {
 
 class Cow {
   constructor(initialPosition, scale) {
-    this.texture = PIXI.Texture.fromImage("content/cow.png");
-    this.object = new PIXI.Sprite(this.texture);
+    this.object = new PIXI.Sprite(PIXI.loader.resources.cow.texture);
     this.object.alpha = (Math.random() * .3) + .2;
     stage.addChildAt(this.object, 0);
 
@@ -238,7 +229,7 @@ class Cow {
     this.object.y += this.speedY;
 
     if (this.object.x > SCREENWIDTH) {
-      this.object.x = -this.texture.width;
+      this.object.x = -PIXI.loader.resources.cow.texture.width;
     }
 
     if (this.object.y > SCREENHEIGHT - 50) {
@@ -268,19 +259,17 @@ class Environment {
   }
 
   GenerateGround(dirtCount, grassCount) {
-    this.textureDirt = PIXI.Texture.fromImage("content/dirt.png");
     this.dirtArray = [];
     for (var x = 0; x < dirtCount; x++) {
-      this.dirtArray.push(new PIXI.Sprite(this.textureDirt));
+      this.dirtArray.push(new PIXI.Sprite(PIXI.loader.resources.dirt.texture));
       this.dirtArray[x].y = SCREENHEIGHT - 50;
       this.dirtArray[x].x = x * 50;
       stage.addChildAt(this.dirtArray[x], 1);
     }
 
-    this.textureGrass = PIXI.Texture.fromImage("content/grass.png");
     this.grassArray = [];
     for (var x = 0; x < grassCount / 2; x++) {
-      this.grassArray.push(new PIXI.Sprite(this.textureGrass));
+      this.grassArray.push(new PIXI.Sprite(PIXI.loader.resources.grass.texture));
       this.grassArray[x].y = SCREENHEIGHT - 100;
       this.grassArray[x].x = x * 256;
       stage.addChildAt(this.grassArray[x], 1);
