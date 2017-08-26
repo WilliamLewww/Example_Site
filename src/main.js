@@ -24,7 +24,7 @@ document.addEventListener('keyup', onKeyUp);
 document.addEventListener('mousedown', onMouseDown);
 document.addEventListener('mouseup', onMouseUp);
 
-var text = new PIXI.Text("William's Showcase", {font:"50px Courier New", fill:"darkred"});
+var text = new PIXI.Text("Example Website", {font:"50px Courier New", fill:"darkred"});
 text.x = (SCREENWIDTH / 2) - (text.width / 2); text.y = (SCREENHEIGHT / 2) - (text.height / 2);
 var text2 = new PIXI.Text("I don't know how to make websites", {font:"20 Impact", fill:"#090909"});
 text2.x = (SCREENWIDTH / 2) - (text2.width / 2); text2.y = (SCREENHEIGHT / 2) + text2.height;
